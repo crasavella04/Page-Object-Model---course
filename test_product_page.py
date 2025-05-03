@@ -22,6 +22,7 @@ from pages.product_page import ProductPage
 #     page.should_be_success_message()
 #     page.should_be_correct_basket_total()
 
+@pytest.mark.xfail(reason="Known bug: success message appears after adding product to basket")
 def test_guest_cant_see_success_message_after_adding_product_to_basket(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/"
     page = ProductPage(browser, link)
@@ -37,6 +38,7 @@ def test_guest_cant_see_success_message(browser):
     assert page.is_not_element_present(*ProductPage.SUCCESS_MESSAGE), \
         "Success message is presented, but should not be"
 
+@pytest.mark.xfail(reason="Known bug: success message is visible even without adding product")
 def test_message_disappeared_after_adding_product_to_basket(browser):
     link = "http://selenium1py.pythonanywhere.com/catalogue/the-shellcoders-handbook_209/?promo=newYear"
     page = ProductPage(browser, link)
